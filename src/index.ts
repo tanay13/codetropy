@@ -1,17 +1,29 @@
 import chokidar from 'chokidar';
+import chalk from 'chalk';
 import path from 'path';
 
+const ignoreFiles = [
+  'node_modules',
+  '.git',
+  'package.json',
+  'package-lock.json',
+];
+
 const watcher = chokidar.watch(`${path.join('__dirname', '../')}`, {
-  ignored: 'node_modules',
+  ignored: ignoreFiles,
   ignoreInitial: true,
   persistent: true,
 });
 
 // Add event listeners.
 watcher
-  .on('add', (path) => console.log(`File ${path} has been added`))
-  .on('change', (path) => console.log(`File ${path} has been changed`))
-  .on('unlink', (path) => console.log(`File ${path} has been removed`));
+  .on('add', (path) => console.log(chalk.green(`File ${path} has been added`)))
+  .on('change', (path) =>
+    console.log(chalk.blue(`File ${path} has been changed`))
+  )
+  .on('unlink', (path) =>
+    console.log(chalk.yellow(`File ${path} has been removed`))
+  );
 
 // More possible events.
 watcher
