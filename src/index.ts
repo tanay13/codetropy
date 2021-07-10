@@ -2,6 +2,8 @@ import chokidar from 'chokidar';
 import path from 'path';
 
 const watcher = chokidar.watch(`${path.join('__dirname', '../')}`, {
+  ignored: 'node_modules',
+  ignoreInitial: true,
   persistent: true,
 });
 
