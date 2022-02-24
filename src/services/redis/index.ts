@@ -8,6 +8,7 @@ class RedisSetup {
   constructor(configs: IRedisObject) {
     this.config = configs;
     this.dbinit().then(() => {
+      this.redisClient.set("total", "0");
       console.log("DB connected");
     });
   }
@@ -31,6 +32,16 @@ class RedisSetup {
           console.log(err);
         }
         resolve(reply);
+      });
+    });
+  }
+  getValue(filename: string): Promise<string | null> {
+    return new Promise((resolve) => {
+      this.redisClient.get(filename, (err, val) => {
+        if (err) {
+          console.log(err);
+        }
+        resolve(val);
       });
     });
   }

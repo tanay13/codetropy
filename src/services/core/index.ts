@@ -24,9 +24,32 @@ class Codetropy {
   async setStat(filename: string, stats: Stats) {
     // DB call
 
-    const response = await this.redisInit.setValue(filename, 10);
+    let prevVal = await this.redisInit.getValue(filename);
+    let prevTotal = await this.redisInit.getValue("total");
+    let prevValInt;
+    let prevTotalInt = 0;
 
-    console.log(stats);
+    if (prevVal != null) {
+      prevValInt = parseInt(prevVal);
+    } else {
+      prevValInt = 0;
+    }
+
+    if (prevTotal != null) prevTotalInt = parseInt(prevTotal);
+
+    if (prevValInt < stats.size) {
+      let increament = stats.size - prevValInt;
+      await this.redisInit.setValue("total", prevTotalInt + increament);
+    } else {
+      let decreament = prevValInt - stats.size;
+      await this.redisInit.setValue("total", prevTotalInt - decreament);
+    }
+
+    console.log("Values written in key ['Total']");
+
+    const response = await this.redisInit.setValue(filename, stats.size);
+
+    console.log(`Values written in key[${filename}]`);
   }
 }
 
