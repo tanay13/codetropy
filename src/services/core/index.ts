@@ -1,11 +1,14 @@
 import { IConfig } from "./interface";
 import chokidar from "chokidar";
 import { Stats } from "fs";
+import RedisSetup from "../redis";
 
-export class Codetropy {
+class Codetropy {
   ignoreFiles: Array<string>;
   fileWatcher: chokidar.FSWatcher;
   workDir: string;
+  redisInit: RedisSetup;
+
   constructor(config: IConfig) {
     this.ignoreFiles = [...config.ignoreFiles];
     this.workDir = config.workDir;
@@ -14,11 +17,17 @@ export class Codetropy {
       ignoreInitial: true,
       persistent: true,
     });
+
+    this.redisInit = new RedisSetup(config.dbConfig);
   }
 
-  checkValues(filename: string, stats: Stats) {
+  async setStat(filename: string, stats: Stats) {
     // DB call
-    console.log(filename + " Updated!!");
+
+    const response = await this.redisInit.setValue(filename, 10);
+
     console.log(stats);
   }
 }
+
+export default Codetropy;

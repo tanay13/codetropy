@@ -37,14 +37,18 @@ const ignoreFiles = [
 //   .on("error", (error) => console.log(`Watcher error: ${error}`))
 //   .on("ready", () => console.log("Initial scan complete. Ready for changes"));
 
-import { Codetropy } from "./services/core";
+import Codetropy from "./services/core";
 
 const codetropy = new Codetropy({
   ignoreFiles,
   workDir: `${path.join("__dirname", "../")}`,
   verbose: false,
+  dbConfig: {
+    host: "127.0.0.1",
+    port: 6379,
+  },
 });
 
 codetropy.fileWatcher.on("change", (path: string, stats: Stats) => {
-  codetropy.checkValues(path, stats);
+  codetropy.setStat(path, stats);
 });
