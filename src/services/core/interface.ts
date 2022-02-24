@@ -5,7 +5,3 @@ export interface IConfig {
   workDir: string;
   verbose: boolean;
 }
-
-export interface IStats {
-  stats: Stats;
-}

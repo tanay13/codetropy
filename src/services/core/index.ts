@@ -1,6 +1,6 @@
-import { IConfig, IStats } from "./interface";
+import { IConfig } from "./interface";
 import chokidar from "chokidar";
-import path from "path";
+import { Stats } from "fs";
 
 export class Codetropy {
   ignoreFiles: Array<string>;
@@ -16,7 +16,7 @@ export class Codetropy {
     });
   }
 
-  checkValues(filename: string, stats: IStats) {
+  checkValues(filename: string, stats: Stats) {
     // DB call
     console.log(filename + " Updated!!");
     console.log(stats);

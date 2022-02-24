@@ -1,5 +1,5 @@
 // import chokidar from "chokidar";
-import chalk from "chalk";
+// import chalk from "chalk";
 import { Stats } from "fs";
 import path from "path";
 
@@ -45,4 +45,6 @@ const codetropy = new Codetropy({
   verbose: false,
 });
 
-codetropy.fileWatcher.on("change", (path: string, stats: Stats) => {});
+codetropy.fileWatcher.on("change", (path: string, stats: Stats) => {
+  codetropy.checkValues(path, stats);
+});
