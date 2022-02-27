@@ -31,8 +31,8 @@ class RedisSetup {
         if (err) {
           console.log(err);
         }
-        resolve(reply);
       });
+      resolve(val);
     });
   }
   getValue(filename: string): Promise<string | null> {

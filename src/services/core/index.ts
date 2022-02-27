@@ -29,6 +29,8 @@ class Codetropy {
     let prevValInt;
     let prevTotalInt = 0;
 
+    let totalData;
+
     if (prevVal != null) {
       prevValInt = parseInt(prevVal);
     } else {
@@ -39,10 +41,16 @@ class Codetropy {
 
     if (prevValInt < stats.size) {
       let increament = stats.size - prevValInt;
-      await this.redisInit.setValue("total", prevTotalInt + increament);
+      totalData = await this.redisInit.setValue(
+        "total",
+        prevTotalInt + increament
+      );
     } else {
       let decreament = prevValInt - stats.size;
-      await this.redisInit.setValue("total", prevTotalInt - decreament);
+      totalData = await this.redisInit.setValue(
+        "total",
+        prevTotalInt - decreament
+      );
     }
 
     console.log("Values written in key ['Total']");
@@ -50,6 +58,8 @@ class Codetropy {
     const response = await this.redisInit.setValue(filename, stats.size);
 
     console.log(`Values written in key[${filename}]`);
+
+    return totalData;
   }
 }
 
