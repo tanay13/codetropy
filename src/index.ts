@@ -20,9 +20,6 @@ const codetropy = new Codetropy({
 });
 
 codetropy.fileWatcher.on("change", async (path: string, stats: Stats) => {
-  // const dataToSend = await codetropy.setStat(path, stats);
-  // console.log(dataToSend);
-
   const dataToSend: IReturnObject = {
     fileName: path,
     value: stats.size,
@@ -31,7 +28,7 @@ codetropy.fileWatcher.on("change", async (path: string, stats: Stats) => {
   axios
     .post("http://localhost:8080/data", dataToSend)
     .then(function (response) {
-      // console.log(response);
+      console.log("Data Sent");
     })
     .catch(function (error) {
       console.log(error);
