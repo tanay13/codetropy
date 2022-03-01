@@ -15,7 +15,7 @@ const ignoreFiles = [
 
 const codetropy = new Codetropy({
   ignoreFiles,
-  workDir: `${path.join("__dirname", "../")}`,
+  workDir: `${path.join("__dirname", "../../")}`,
   verbose: false,
 });
 
@@ -37,24 +37,3 @@ codetropy.fileWatcher.on("change", async (path: string, stats: Stats) => {
       console.log(error);
     });
 });
-
-// http
-//   .createServer((req, res) => {
-//     if (req.url === "/") {
-//       const headers = {
-//         "Content-Type": "text/event-stream",
-//         Connection: "keep-alive",
-//         "Access-Control-Allow-Origin": "*",
-//         "Cache-Control": "no-cache",
-//       };
-//       res.writeHead(200, headers);
-//       codetropy.fileWatcher.on("change", async (path: string, stats: Stats) => {
-//         const dataToSend = await codetropy.setStat(path, stats);
-//         const data = `data: ${dataToSend}\n\n`;
-//         res.write(data);
-//       });
-//     }
-//   })
-//   .listen(8080, () => {
-//     console.log("Server connected");
-//   });
