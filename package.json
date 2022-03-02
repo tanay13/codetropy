@@ -4,6 +4,9 @@
   "description": "A package for real time change of lines in a project",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "bin": {
+    "codetropy": "dist/cli.js"
+  },
   "scripts": {
     "dev": "ts-node src/index.ts",
     "build": "tsc",

@@ -5,12 +5,19 @@ import axios from 'axios';
 import Codetropy from './services/core';
 import { IReturnObject } from './services/core/interface';
 
-const ignoreFiles = ['../node_modules', '../src', '.git', '../package.json', '../package-lock.json'];
+export default function work(pwd: string) {
+  const ignoreFiles = [
+    `${path.join(pwd, '/node_modules')}`,
+    `${path.join(pwd, '/.git')}`,
+    `${path.join(pwd, '/package.json')}`,
+    `${path.join(pwd, '/package-lock.json')}`,
+  ];
 
-export default function work() {
+  console.log('Codetropy is running....');
+
   const codetropy = new Codetropy({
     ignoreFiles,
-    workDir: `${path.join('__dirname', '../')}`,
+    workDir: `${path.join(pwd, '/')}`,
     verbose: false,
   });
 
