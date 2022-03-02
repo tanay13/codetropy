@@ -1,5 +1,5 @@
-import { IConfig } from "./interface";
-import chokidar from "chokidar";
+import { IConfig } from './interface';
+import chokidar from 'chokidar';
 
 class Codetropy {
   ignoreFiles: Array<string>;
