@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 const command = process.argv[2];
-const pwd = process.cwd();
-import work from './index';
+
+import { askQuestion } from './services/inquire';
 
 switch (command) {
   case 'start':
-    work(pwd);
+    askQuestion();
     break;
   default:
     console.log('Wrong command');

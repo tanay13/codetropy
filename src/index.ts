@@ -4,36 +4,47 @@ import axios from 'axios';
 
 import Codetropy from './services/core';
 import { IReturnObject } from './services/core/interface';
+import { findTeam, saveTeam } from './services/actions';
 
-export default function work(pwd: string) {
-  const ignoreFiles = [
-    `${path.join(pwd, '/node_modules')}`,
-    `${path.join(pwd, '/.git')}`,
-    `${path.join(pwd, '/package.json')}`,
-    `${path.join(pwd, '/package-lock.json')}`,
-  ];
+export default async function work(pwd: string, teamName: string) {
+  try {
+    const ifTeam = await findTeam(teamName);
 
-  console.log('Codetropy is running....');
+    if (ifTeam) return;
 
-  const codetropy = new Codetropy({
-    ignoreFiles,
-    workDir: `${path.join(pwd, '/')}`,
-    verbose: false,
-  });
+    const saveT = await saveTeam(teamName);
 
-  codetropy.fileWatcher.on('change', async (path: string, stats: any) => {
-    const dataToSend: IReturnObject = {
-      fileName: path,
-      value: stats.size,
-    };
+    const ignoreFiles = [
+      `${path.join(pwd, '/node_modules')}`,
+      `${path.join(pwd, '/.git')}`,
+      `${path.join(pwd, '/package.json')}`,
+      `${path.join(pwd, '/package-lock.json')}`,
+    ];
 
-    axios
-      .post('http://localhost:8080/data', dataToSend)
-      .then(function (response) {
-        console.log('Data Sent');
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  });
+    console.log('Codetropy is running....');
+
+    const codetropy = new Codetropy({
+      ignoreFiles,
+      workDir: `${path.join(pwd, '/')}`,
+      verbose: false,
+    });
+
+    codetropy.fileWatcher.on('change', async (path: string, stats: any) => {
+      const dataToSend: IReturnObject = {
+        fileName: path,
+        value: stats.size,
+      };
+
+      axios
+        .post('http://localhost:8080/data', dataToSend)
+        .then(function (response) {
+          console.log('Data Sent');
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    });
+  } catch (e) {
+    console.error(e);
+  }
 }
