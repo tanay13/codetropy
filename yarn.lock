@@ -268,6 +268,18 @@
   "resolved" "https://registry.npmjs.org/clone/-/clone-1.0.4.tgz"
   "version" "1.0.4"
 
+"codetropy@file:":
+  "resolved" "file:"
+  "version" "1.0.0"
+  dependencies:
+    "axios" "^0.26.0"
+    "chalk" "^4.1.1"
+    "chokidar" "^3.5.2"
+    "codetropy" "file:"
+    "inquirer" "^8.2.2"
+    "mongoose" "^6.3.0"
+    "redis" "^3.1.2"
+
 "color-convert@^1.9.0":
   "integrity" "sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg=="
   "resolved" "https://registry.npmjs.org/color-convert/-/color-convert-1.9.3.tgz"

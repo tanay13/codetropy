@@ -12,7 +12,7 @@ export default async function work(pwd: string, teamName: string) {
 
     if (ifTeam) return;
 
-    const saveT = await saveTeam(teamName);
+    const savedTeam = await saveTeam(teamName);
 
     const ignoreFiles = [
       `${path.join(pwd, '/node_modules')}`,
@@ -36,7 +36,7 @@ export default async function work(pwd: string, teamName: string) {
       };
 
       axios
-        .post('http://localhost:8080/data', dataToSend)
+        .post(`http://localhost:8080/data/${teamName}`, dataToSend)
         .then(function (response) {
           console.log('Data Sent');
         })
