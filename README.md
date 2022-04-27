@@ -11,7 +11,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/tanay13/codetropy">
-    <img src="images/logo.png" alt="Logo" width="100" height="100">
+    <img src="images/logo.png" alt="Logo" width="500" height="500">
   </a>
 
   <h3 align="center">Codetropy</h3>
@@ -55,8 +55,6 @@
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 Codetropy is a set of microservice which watches over your project directory and calculates the change in the total as well as the specific file by continuously watching over the addition and deletion of characters within the project directory.
 
