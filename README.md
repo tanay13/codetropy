@@ -67,7 +67,7 @@ Tools that were used in the process of making this microservice are:
 - [Typescript](https://www.typescriptlang.org/)
 - [Node.js](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
-- [React](<[https://](https://reactjs.org/)>)
+- [React](https://https://reactjs.org/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -95,8 +95,6 @@ This is an example of how to list things you need to use the software and how to
   ```
 
 ### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
 1. Install the codetropy package locally in the project structure.
 
